@@ -256,17 +256,10 @@ namespace Tizen.Applications
         internal static void DoOnLoopCreate()
         {
             Log.Info(LogTag, "DoOnLoopCreate() called");
-
-            Log.Info("NUI", "[NUI] NUIApplicationInitializer: ProcessorController Initialize");
-            Tracer.Begin("[NUI] NUIApplicationInitializer: ProcessorController Initialize");
-            ProcessorController.Instance.Initialize();
-            Tracer.End();
-
-            // Initialize DisposeQueue Singleton class. This is also required to create DisposeQueue on main thread.
-            Log.Info("NUI", "[NUI] NUIApplicationInitializer: DisposeQueue Initialize");
-            Tracer.Begin("[NUI] NUIApplicationInitializer: DisposeQueue Initialize");
-            DisposeQueue.Instance.Initialize();
-            Tracer.End();
+            NUIApplicationInitializer.Initialize();
+            UIContext.Instance?.GetDefaultWindow()?.SetPositionSize(new Rectangle(0, 0, 1, 1));
+            UIContext.Instance?.GetDefaultWindow()?.SetTransparency(true);
+            UIContext.Instance?.GetDefaultWindow()?.Hide();
 
             // Empty implementation for C# launcher
         }
